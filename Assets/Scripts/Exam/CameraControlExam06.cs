@@ -1,18 +1,21 @@
+using System;
 using UnityEngine;
 
 public class CameraControlExam06 : MonoBehaviour
 {
-    public GameObject player1;
-    public GameObject player2;
-    public float offset;
+    public Transform player1;
+    public Transform player2;
     public Camera targetCamera;
+    public float offset;
+    
+    public float offsetY = 10f;
+    public float zoomMultiplier = .5f;
 
-    // Update is called once per frame
-    void LateUpdate()
+    private void Update()
     {
-        Vector3 player1Pos = player1.transform.position;
-        Vector3 player2Pos = player2.transform.position;
-        
-        // Student code ...
+        Vector3 Center = (player1.position + player2.position) / 2f;
+        transform.position = new Vector3(Center.x, offsetY, Center.z);
+        float distance = Vector3.Distance(player1.position, player2.position);
+        targetCamera.orthographicSize = distance * zoomMultiplier;
     }
 }
