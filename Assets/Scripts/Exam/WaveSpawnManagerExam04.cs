@@ -21,7 +21,7 @@ public class WaveSpawnManagerExam04 : MonoBehaviour
         {
             return;
         }
-
+        
         if (Time.time >= waveEndTime && waveController.IsComplete())
         {
             currentWave++;

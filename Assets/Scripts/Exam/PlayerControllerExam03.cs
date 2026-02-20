@@ -9,6 +9,7 @@ public class PlayerControllerExam03 : MonoBehaviour
 
     public bool enableAutoFireMode;
     public float autoFireInterval = 0.1f;
+    public float delay = 0.1f;
 
     private float horizontalInput;
     private InputAction moveAction;
@@ -35,6 +36,16 @@ public class PlayerControllerExam03 : MonoBehaviour
             transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
         }
 
+        if (Keyboard.current.eKey.wasPressedThisFrame)
+        {
+            enableAutoFireMode = !enableAutoFireMode;
+        }
+
+        if (enableAutoFireMode == true && Time.time > autoFireInterval)
+        {
+            autoFireInterval += delay;
+            Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        }
         if (shootAction.triggered)
         {
             Instantiate(projectilePrefab, transform.position, transform.rotation);
